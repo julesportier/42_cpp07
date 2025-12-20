@@ -37,8 +37,8 @@ int main(void)
 
 	print_bold("\nmutable std::string array");
 	std::string s[3] = {"aet", "dskfjh", "kajhfa"};
-	iter(s, 3, print_scalar<std::string>);
+	iter(s, 3, print_generic<std::string>);
 	iter(s, 3, hello_string);
-	iter(s, 3, print_scalar<std::string>);
+	iter(s, 3, print_generic<std::string>);
 	return (0);
 }

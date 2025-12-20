@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 template <typename T>
-void print_scalar(T s)
+void print_generic(T s)
 {
 	std::cout << s << '\n';
 };
