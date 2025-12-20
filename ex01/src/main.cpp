@@ -32,6 +32,7 @@ int main(void)
 	print_bold("\nimmutable int array");
 	const int x[3] = {22, 33, 44};
 	iter(x, 3, print_int);
+	// doesn't compile because it drops const qualifier
 	// iter(x, 3, inc_int);
 	// iter(x, 3, print_int);
 
@@ -40,5 +41,11 @@ int main(void)
 	iter(s, 3, print_generic<std::string>);
 	iter(s, 3, hello_string);
 	iter(s, 3, print_generic<std::string>);
+	try {
+		iter(s, -3, print_generic<std::string>);
+	}
+	catch (const std::exception& e) {
+		std::cout << "Error: " << e.what() << '\n';
+	}
 	return (0);
 }
