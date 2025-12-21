@@ -2,6 +2,7 @@
 # define ARRAY_H
 
 #include <exception>
+#include <iostream>
 
 template <typename T> class Array
 {
@@ -50,12 +51,31 @@ public:
 
 	unsigned int size() const
 	{
-		return (m_size); // better with size_t ?
+		return (m_size);
 	}
 
 private:
 	const unsigned int m_size;
 	T* m_arr;
 };
+
+template <typename T>
+void fill_array(Array<T>& a, unsigned int start, unsigned int step)
+{
+	for (unsigned int i = 0; i < a.size(); ++i) {
+		a[i] = start + i * step;
+	}
+}
+
+template <typename T>
+void print_array(Array<T>& a, const std::string& name)
+{
+	std::cout << "# " << name << " #"<< '\n';
+	std::cout << "object address: " << &a << '\n';
+	std::cout << "member array address: " << &(a[0]) << '\n';
+	for (unsigned int i = 0; i < a.size(); ++i) {
+		std::cout << a[i] << '\n';
+	}
+}
 
 #endif

@@ -1,54 +1,41 @@
 #include <iostream>
-#include <cstdlib>
 #include "Array.h"
 
-#define MAX_VAL 750
+void print_exception(const std::exception& e)
+{
+	std::cout << "Error: " << e.what() << '\n';
+}
+
 int main(void)
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+	Array<int> def;	
+	try {
+		std::cout << def[0] << '\n';
+	} catch (const std::exception& e) {
+		print_exception(e);
+	}
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
-    }
-    try
-    {
-        numbers[-2] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+	Array<int> i_arr(5);
+	fill_array(i_arr, 3, 2);
+	print_array(i_arr, "i_arr");
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
-    delete [] mirror;//
-    return 0;
+	Array<int> i_arr_cpy(i_arr);
+	print_array(i_arr_cpy, "i_arr_cpy");
+
+	fill_array(i_arr, -20, 5);
+	print_array(i_arr, "i_arr");
+	Array<int> a_arr = i_arr;
+	print_array(a_arr, "a_arr");
+
+	Array<std::string> s_arr(3);
+	s_arr[0] = "foo";
+	s_arr[1] = "bar";
+	s_arr[2] = "2000";
+	print_array(s_arr, "s_arr");
+	Array<std::string> s_arr_cpy(s_arr);
+	print_array(s_arr_cpy, "s_arr_cpy");
+	Array<std::string> s_arr_a = s_arr;
+	print_array(s_arr_a, "s_arr_a");
+
+	return (0);
 }
