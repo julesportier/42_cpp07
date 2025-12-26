@@ -35,7 +35,7 @@ DEP_FILES := $(OBJ:.o=.d)
 ###########
 # TARGETS #
 ###########
-.PHONY: all clean fclean re dbg asan usan
+.PHONY: all clean fclean re dbg noerr asan usan
 
 all: $(BUILD_DIR) $(NAME)
 
