@@ -5,21 +5,21 @@
 #include <stdexcept>
 
 template <typename T>
-void print_generic(T s)
-{
-	std::cout << s << '\n';
-};
-
-template <typename A, typename L, typename F>
-void iter(A* addr, const L len, F func)
+void iter(T* addr, const size_t len, void (*func)(T&))
 {
 	if (!addr)
 		throw std::invalid_argument("array address is NULL");
-	if (!func)
-		throw std::invalid_argument("func ptr is NULL");
-	if (len < 0)
-		throw std::out_of_range("len must be positive");
-	for (L i = 0; i < len; ++i) {
+	for (size_t i = 0; i < len; ++i) {
+		func(*(addr + i));
+	}
+};
+
+template <typename T>
+void iter(const T* addr, const size_t len, void (*func)(const T&))
+{
+	if (!addr)
+		throw std::invalid_argument("array address is NULL");
+	for (size_t i = 0; i < len; ++i) {
 		func(*(addr + i));
 	}
 };
